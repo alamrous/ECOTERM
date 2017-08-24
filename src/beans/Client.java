@@ -6,6 +6,7 @@ public class Client {
 	private String name;
 	private String firstname;
 	private String email;
+	private String pwd;
 	private Integer panier_id;
 	public Integer getId() {
 		return id;
@@ -37,6 +38,12 @@ public class Client {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	
 	

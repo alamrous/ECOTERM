@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import beans.Client;
 
 /**
- * Servlet implementation class Accueil
+ * Servlet implementation class Register
  */
-@WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+@WebServlet("/Register")
+public class Register extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Accueil() {
+    public Register() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +29,21 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getSession().getAttribute("client") == null);
-		Client client;
-		if((client = (Client) request.getSession().getAttribute("client")) == null)
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String firstname= request.getParameter("firstname");
+		String pwd= request.getParameter("pwd");
+		if(email.length()>1 && name.length()>1  && firstname.length()>1 && pwd.length()>1 )
 		{
-			request.getSession().setAttribute("client", null);
+			Client client= new Client();
+			client.setFirstname(firstname);
+			client.setName(name);
+			client.setEmail(email);
+			client.setPwd(pwd);
+			request.getSession().setAttribute("client", client);
 		}
-		
-		request.getRequestDispatcher("Accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("views/connection/success.jsp").forward(request, response);
+
 		
 	}
 

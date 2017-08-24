@@ -7,20 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import beans.Client;
 
 /**
- * Servlet implementation class Accueil
+ * Servlet implementation class Profile
  */
-@WebServlet("/Accueil")
-public class Accueil extends HttpServlet {
+@WebServlet("/Profile")
+public class Profile extends HttpServlet {
+	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Accueil() {
+    public Profile() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,9 @@ public class Accueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getSession().getAttribute("client") == null);
-		Client client;
-		if((client = (Client) request.getSession().getAttribute("client")) == null)
-		{
-			request.getSession().setAttribute("client", null);
-		}
-		
-		request.getRequestDispatcher("Accueil.jsp").forward(request, response);
-		
+		Client client = (Client) request.getSession().getAttribute("client");
+		request.setAttribute("client", client);
+		request.getRequestDispatcher("profile.jsp").forward(request, response);
 	}
 
 	/**
